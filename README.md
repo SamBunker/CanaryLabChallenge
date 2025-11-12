@@ -55,7 +55,7 @@ Create classes for each vehicle
 ├─ Parking.js (number of floors, number of spots)
 
 ## Manufacturing
-├─ CreateVehicle.js (unsure right now)
+├─ CreateVehicle.js (vehicle size)
 ├─ CreateSpot.js (floor)
 
 ## Strategy/Rules
