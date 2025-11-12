@@ -9,15 +9,23 @@ class ParkingSpot {
 
     isAvailable() { return !this.isOccupied; }
     canFit(vehicle) {
-        if (this.size === 'small' ) { return vehicle.getSize() === 'small'; }
-        else if (this.size === 'medium') { return vehicle.getSize() === 'medium'; }
-        else if (this.size === 'large') { return true; }
+        if (this.size === 'small') {
+            return vehicle.getSize() === 'small';
+        } else if (this.size === 'medium') {
+            return vehicle.getSize() === 'small' || vehicle.getSize() === 'medium';
+        } else if (this.size === 'large') {
+            return true;
+        }
         return false;
     }
 
     occupy(vehicle) {
-        if (this.isOccupied) { throw new Error('Spot ${this.floor}-${this.spotNumber} is already occupied!'); }
-        if (!this.canFit(vehicle)) { throw new Error('Vehicle size ${vehicle.getsize()} cannot fit in ${this.size} spot!'); }
+        if (this.isOccupied) {
+            throw new Error(`Spot ${this.floor}-${this.spotNumber} is already occupied!`);
+        }
+        if (!this.canFit(vehicle)) {
+            throw new Error(`Vehicle size ${vehicle.getSize()} cannot fit in ${this.size} spot!`);
+        }
         this.isOccupied = true;
         this.currentVehicle = vehicle;
     }
@@ -27,8 +35,8 @@ class ParkingSpot {
         this.currentVehicle = null;
     }
 
-    getSpotID() {
-        return '${this.floor}-${this.spotNumber}';
+    getSpotId() {
+        return `${this.floor}-${this.spotNumber}`;
     }
 }
 
