@@ -1,6 +1,6 @@
-const readline = require('readline');
-const ParkingLot = require('./src/core/ParkingLot');
-const CreateVehicle = require('./src/factory/CreateVehicle');
+import readline from 'readline';
+import ParkingLot from './src/core/ParkingLot.js';
+import CreateVehicle from './src/factory/CreateVehicle.js';
 
 const rl = readline.createInterface({ 
     input: process.stdin,
@@ -32,13 +32,34 @@ async function autoParkVehicle() {
         const ticket = parkingLot.autoPark(vehicle);
 
         console.log('\n✅ Vehicle parked successfully.');
-        console.log(' Ticket ID: ${ticket.id}');
-        console.log(' Vehicle: ${ticket.vehicle.getType()}');
-        console.log(' Spot: ${ticket.spot.getSpotId()}');
-        console.log(' Entry Time: ${ticket.getEntryTimeFormatted()}');
+        console.log(`👉 Ticket ID: ${ticket.id}`);
+        console.log(`👉 Vehicle: ${ticket.vehicle.getType()}`);
+        console.log(`👉 Spot: ${ticket.spot.getSpotId()}`);
+        console.log(`👉 Entry Time: ${ticket.getEntryTimeFormatted()}`);
+        console.log('\n');
     } catch (error) {
         console.log('\n❌ Unable to Park Vehicle!');
-        console.log('${error.message}');
+        console.log(`  ${error.message}\n`);
+    }
+}
+
+async function manualParkVehicle() {
+    try {
+        const type = await question('Enter vehicle type (bike/car/truck): ');
+        const spotId = await question('Enter spot ID (e.g., 1-S1, 2-M3): ');
+
+        const vehicle = CreateVehicle.create(type);
+        const ticket = parkingLot.park(spotId, vehicle);
+
+        console.log('\n✅ Vehicle parked successfully.');
+        console.log(`👉 Ticket ID: ${ticket.id}`);
+        console.log(`👉 Vehicle: ${ticket.vehicle.getType()}`);
+        console.log(`👉 Spot: ${ticket.spot.getSpotId()}`);
+        console.log(`👉 Entry Time: ${ticket.getEntryTimeFormatted()}`);
+        console.log('\n');
+    } catch (error) {
+        console.log('\n❌ Unable to Park Vehicle!');
+        console.log(`  ${error.message}\n`);
     }
 }
 
@@ -48,28 +69,33 @@ async function unparkVehicle() {
         const receipt = parkingLot.unpark(ticketId);
 
         console.log('\n✅ Vehicle unparked successfully.');
-        console.log('Ticket ID: ${receipt.ticketId}');
-        console.log('Vehicle: ${receipt.vehicle}');
-        console.log('Spot: ${receipt.spot}');
-        console.log('Entry Time: ${receipt.entryTime}');
-        console.log('Duration: ${recipt.duration) hour(s)');
-        console.log(' Fee: $${receipt.fee.toFixed(2)}');
+        console.log(`👉 Ticket ID: ${receipt.ticketId}`);
+        console.log(`👉 Vehicle: ${receipt.vehicle}`);
+        console.log(`👉 Spot: ${receipt.spot}`);
+        console.log(`👉 Entry Time: ${receipt.entryTime}`);
+        console.log(`👉 Duration: ${receipt.duration} hour(s)`);
+        console.log(`👉 Fee: $${receipt.fee.toFixed(2)}`);
     } catch (error) {
-        console.log('\n❌ Unable to Park Vehicle!');
-        console.log('${error.message}');
+        console.log('\n❌ Unable to Unpark Vehicle!');
+        console.log(`${error.message}\n`);
     }
 }
 
 function viewStatus() {
     const status = parkingLot.getStatus();
 
-        console.log('===== CanaryLabs Parkinglot Status =====');
-        console.log('Total Spots: ${status.totalSpots}');
-        console.log('Occupied: ${status.occupied}');
-        console.log('Available: ${status.available');
-        console.log('\n--- Each Floor ---');
+    // console.log('\n' + '='.repeat(50));
+    console.log('     CanaryLabs Parking Lot Status');
+    // console.log('='.repeat(50));
+    console.log(`Total Spots: ${status.totalSpots}`);
+    console.log(`Occupied: ${status.occupied}`);
+    console.log(`Available: ${status.available}`);
+    console.log('\n--- Each Floor ---');
 
-        for (const [floor, data] of Object.entries(status.byFloor)) { console.log;('${floor}: ${data.available}/${data.total} available'); }  
+    for (const [floor, data] of Object.entries(status.byFloor)) {
+        console.log(`${floor}: ${data.available}/${data.total} available`);
+    }
+    console.log('='.repeat(50));
 }
 
 async function main() {
