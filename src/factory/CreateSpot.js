@@ -19,4 +19,4 @@ class CreateSpot {
     }
 }
 
-module.exports = CreateSpot;
+export default CreateSpot;

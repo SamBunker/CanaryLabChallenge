@@ -8,4 +8,4 @@ class PricingStrategy {
     static formatFee(fee) { return '$${fee.toFixed(2)}'; }
 }
 
-module.exports = PricingStrategy;
+export default PricingStrategy;

@@ -6,4 +6,4 @@ class SmallSpot extends ParkingSpot {
     }
 }
 
-module.exports = SmallSpot;
+export default SmallSpot;

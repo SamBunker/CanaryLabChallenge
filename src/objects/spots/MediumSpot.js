@@ -6,4 +6,5 @@ class MediumSpot extends ParkingSpot {
     }
 }
 
-module.exports = MediumSpot;
+export default MediumSpot;
+

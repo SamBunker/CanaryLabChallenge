@@ -32,4 +32,4 @@ class ParkingSpot {
     }
 }
 
-module.exports = ParkingSpot;
+export default ParkingSpot;
