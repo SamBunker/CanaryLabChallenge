@@ -19,4 +19,4 @@ class CreateVehicle {
     }
 }
 
-module.exports = CreateVehicle;
+export default CreateVehicle;
