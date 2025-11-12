@@ -10,4 +10,4 @@ class Ticket {
     getEntryTimeFormatted() { return new Date(this.entrtyTime).toLocaleString(); }    
 }
 
-module.exports = Ticket;
+export default Ticket;
