@@ -45,17 +45,18 @@ async function autoParkVehicle() {
         console.log('\n');
     } catch (error) {
         console.log('\n❌ Unable to Park Vehicle!');
-        console.log(`  ${error.message}\n`);
+        console.log(`❌ ${error.message}\n`);
     }
 }
 
 async function manualParkVehicle() {
     try {
         const type = await question('Enter vehicle type (bike/car/truck): ');
+        const vehicle = CreateVehicle.create(type);
+
         console.log('Note, bikes are S (small), cars are M (medium), trucks are L (large)');
         const spotId = await question('Enter spot ID (e.g., 1-S1, 2-M3 ): ');
 
-        const vehicle = CreateVehicle.create(type);
         const ticket = parkingLot.park(spotId, vehicle);
 
         console.log('\n✅ Vehicle parked successfully.');
@@ -66,7 +67,7 @@ async function manualParkVehicle() {
         console.log('\n');
     } catch (error) {
         console.log('\n❌ Unable to Park Vehicle!');
-        console.log(`  ${error.message}\n`);
+        console.log(`❌ ${error.message}\n`);
     }
 }
 
@@ -85,7 +86,7 @@ async function unparkVehicle() {
         console.log('\n');
     } catch (error) {
         console.log('\n❌ Unable to Unpark Vehicle!');
-        console.log(`${error.message}\n`);
+        console.log(`❌ ${error.message}\n`);
     }
 }
 
