@@ -1,4 +1,14 @@
 {
   "type": "module",
-  "name": "parking-log-system"
+  "name": "parking-log-system",
+  "version": "1.0.0",
+  "description": "Parking lot application for CanaryLabs coding challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Samuel Bunker",
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }
