@@ -1,6 +1,6 @@
-const Bike = require('../objects/vehicles/Bike');
-const Car = require('../objects/vehicles/Car');
-const Truck = require('../objects/vehicles/Truck');
+import Bike from '../objects/vehicles/Bike.js';
+import Car from '../objects/vehicles/Car.js';
+import Truck from '../objects/vehicles/Truck.js';
 
 class CreateVehicle {
     static create(type) {
@@ -14,7 +14,7 @@ class CreateVehicle {
             case 'truck':
                 return new Truck();
             default:
-                throw new Error('Invlaid vehicle type: ${type}. Valid types: bike, car, truck');
+                throw new Error(`Invalid vehicle type: ${type}. Valid types: bike, car, truck`);
         }
     }
 }
