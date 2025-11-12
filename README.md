@@ -1,5 +1,11 @@
 # CanaryLabChallenge
 
+Language Used: JavaScript (node)
+Step-by-step Guide to Run: adding...
+Design Choice: adding...
+How I'd extend it: adding...
+
+----- RULES -----
 Challenge 4. Parking Lot System (OOP Design)
 
 Multi-floor lot with:
