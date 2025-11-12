@@ -1,6 +1,6 @@
-const CreateSpot = require('../factory/CreateSpot');
-const Ticket = require('./Ticket');
-const PricingStrategy = require('./PricingStrategy');
+import CreateSpot from '../factory/CreateSpot.js';
+import Ticket from './Ticket.js';
+import PricingStrategy from './PricingStrategy.js';
 
 class ParkingLot {
     static instance = null;
@@ -13,7 +13,7 @@ class ParkingLot {
         this.activeTickets = new Map();
         this.ticketCounter = 1;
 
-        this.initalizeSpots();
+        this.initializeSpots();
         ParkingLot.instance = this;
     }
 
@@ -22,32 +22,32 @@ class ParkingLot {
         return ParkingLot.instance;
     }
 
-    initalizeSpots() {
+    initializeSpots() {
         this.spots = Array.from({ length: this.floors }, (_, floorIndex) => {
             const floor = floorIndex + 1;
 
             return Object.entries(this.spotsPerFloor).flatMap(([type, count]) => 
                 Array.from({ length: count }, (_, i) => {
                     const prefix = type[0].toUpperCase(); //S, M, or L
-                    const spotId = '${prefix}${i + 1}';
+                    const spotId = `${prefix}${i + 1}`;
                     return CreateSpot.create(type, floor, spotId);
                 })
             );
         }).flat();
     }
 
-    findAvilableSpot(vehicle) {
+    findAvailableSpot(vehicle) {
         return this.spots.find(spot => spot.isAvailable() && spot.canFit(vehicle));
     }
 
     autoPark(vehicle) {
-        const spot = this.findAvilableSpot(vehicle);
+        const spot = this.findAvailableSpot(vehicle);
         if (!spot) {
-            throw new Error('No available spots for ${vehicle.getType()}');
+            throw new Error(`No available spots for ${vehicle.getType()}`);
         }
 
         spot.occupy(vehicle);
-        const ticketId = 'T${String(this.ticketCounter++).padStart(4, "0")}';
+        const ticketId = `T${String(this.ticketCounter++).padStart(4, "0")}`;
         const ticket = new Ticket(ticketId, vehicle, spot);
         this.activeTickets.set(ticketId, ticket);
 
@@ -57,10 +57,10 @@ class ParkingLot {
     park(spotId, vehicle) {
         const spot = this.spots.find(s => s.getSpotId() === spotId);
         if (!spot) {
-            throw new Error('Spot ${spotId} does not exist');
+            throw new Error(`Spot ${spotId} does not exist`);
         }
         spot.occupy(vehicle);
-        const ticketId = 'T${String(this.ticketCounter++).padStart(4, "0")}';
+        const ticketId = `T${String(this.ticketCounter++).padStart(4, "0")}`;
         const ticket = new Ticket(ticketId, vehicle, spot);
         this.activeTickets.set(ticketId, ticket);
 
@@ -71,7 +71,7 @@ class ParkingLot {
         const ticket = this.activeTickets.get(ticketId);
 
         if (!ticket) {
-            throw new Error('Invalid ticket: ${ticketId}');
+            throw new Error(`Invalid ticket: ${ticketId}`);
         }
         const duration = ticket.getDuration();
         const fee = PricingStrategy.calculateFee(ticket.vehicle, duration);
@@ -84,7 +84,7 @@ class ParkingLot {
             vehicle: ticket.vehicle.getType(),
             spot: ticket.spot.getSpotId(),
             entryTime: ticket.getEntryTimeFormatted(),
-            duration: Math.ceil(duration / 60),
+            duration: Math.ceil(duration / (1000 * 60 * 60)),
             fee: fee
         };
     }
@@ -104,11 +104,11 @@ class ParkingLot {
                 const total = floorSpots.length;
                 const occupied = floorSpots.filter(s => !s.isAvailable()).length;
                 const available = total - occupied;
-                reutrn ['Floor ${floor}', { total, occupied, available }];
+                return [`Floor ${floor}`, { total, occupied, available }];
             })
         );
 
-        return { totalSpots: total, occupied, available, byFloor };
+        return { totalSpots: status.totalSpots, occupied: status.occupied, available: status.available, byFloor };
     }
 }
 

@@ -1,6 +1,6 @@
-const SmallSpot = require('../objects/spots/SmallSpot');
-const MediumSpot = require('../objects/spots/MediumSpot');
-const LargeSpot = require('../objects/spots/LargeSpot');
+import SmallSpot from '../objects/spots/SmallSpot.js';
+import MediumSpot from '../objects/spots/MediumSpot.js';
+import LargeSpot from '../objects/spots/LargeSpot.js';
 
 class CreateSpot {
     static create(size, floor, spotNumber) { 
@@ -14,7 +14,7 @@ class CreateSpot {
             case 'large':
                 return new LargeSpot(floor, spotNumber);
             default:
-                throw new Error('Invlaid spot size: ${size}. Valid sizes: small, medium, large');
+                throw new Error(`Invalid spot size: ${size}. Valid sizes: small, medium, large`);
         }
     }
 }

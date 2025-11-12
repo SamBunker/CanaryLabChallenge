@@ -1,4 +1,4 @@
-const ParkingSpot = require("./ParkingSpot");
+import ParkingSpot from "./ParkingSpot.js";
 
 class LargeSpot extends ParkingSpot {
     constructor(floor, spotNumber) {
