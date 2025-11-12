@@ -1,8 +1,8 @@
 import Vehicle from './Vehicle.js';
 
-class Truck {
+class Truck extends Vehicle {
     constructor() {
-        super('truck', 'large', '3');
+        super('truck', 'large', 3);
     }
 }
 export default Truck;
