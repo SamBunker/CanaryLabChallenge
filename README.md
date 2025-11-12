@@ -64,3 +64,9 @@ Calculates the vehicle's pricing based off the size of the vehicle and it's park
 
 ## Tickets
 ├─ Ticket.js (parking ticket with timestamp) -> Appended to a .json file to see different parking tickets, payout, and timestamps from vehicle parking
+
+## Parking Spots
+├─ SmallSpot.js
+├─ MediumSpot.js
+├─ LargeSpot.js
+├─ ParkingSpot.js -> Holds data regarding the parking spot's capacity, availability, and functions for occupying and vacating the spot
