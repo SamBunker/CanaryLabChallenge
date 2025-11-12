@@ -7,7 +7,7 @@ class Ticket {
     }
 
     getDuration() { return Date.now() - this.entryTime; }
-    getEntryTimeFormatted() { return new Date(this.entrtyTime).toLocaleString(); }    
+    getEntryTimeFormatted() { return new Date(this.entryTime).toLocaleString(); }    
 }
 
 export default Ticket;
