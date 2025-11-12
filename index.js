@@ -10,7 +10,13 @@ const rl = readline.createInterface({
 const parkingLot = ParkingLot.getInstance(3, {small: 6, medium: 10, large: 4});
 
 function displayMenu() {
-    console.log('===== CanaryLabs Parkinglot Management System =====');
+    console.log('██████   █████  ██████  ██   ██ ██ ███    ██  ██████       ██      ██████  ██████');
+    console.log('██   ██ ██   ██ ██   ██ ██  ██  ██ ████   ██ ██            ██     ██    ██   ██  ');
+    console.log('██████  ███████ ██████  █████   ██ ██ ██  ██ ██   ███      ██     ██    ██   ██  ');
+    console.log('██      ██   ██ ██   ██ ██  ██  ██ ██  ██ ██ ██    ██      ██     ██    ██   ██  ');
+    console.log('██      ██   ██ ██   ██ ██   ██ ██ ██   ████  ██████       ███████ ██████    ██  ');
+    console.log('- Parking Lot Simulator by Samuel Bunker\n\n');
+    console.log('Please select from the following options!\n');
     console.log('1. Park Vehicle (Auto)');
     console.log('2. Park Vehicle (Manual Spot)');
     console.log('3. Unpark Vehicle');
@@ -46,7 +52,8 @@ async function autoParkVehicle() {
 async function manualParkVehicle() {
     try {
         const type = await question('Enter vehicle type (bike/car/truck): ');
-        const spotId = await question('Enter spot ID (e.g., 1-S1, 2-M3): ');
+        console.log('Note, bikes are S (small), cars are M (medium), trucks are L (large)');
+        const spotId = await question('Enter spot ID (e.g., 1-S1, 2-M3 ): ');
 
         const vehicle = CreateVehicle.create(type);
         const ticket = parkingLot.park(spotId, vehicle);
@@ -75,6 +82,7 @@ async function unparkVehicle() {
         console.log(`👉 Entry Time: ${receipt.entryTime}`);
         console.log(`👉 Duration: ${receipt.duration} hour(s)`);
         console.log(`👉 Fee: $${receipt.fee.toFixed(2)}`);
+        console.log('\n');
     } catch (error) {
         console.log('\n❌ Unable to Unpark Vehicle!');
         console.log(`${error.message}\n`);
@@ -84,9 +92,8 @@ async function unparkVehicle() {
 function viewStatus() {
     const status = parkingLot.getStatus();
 
-    // console.log('\n' + '='.repeat(50));
-    console.log('     CanaryLabs Parking Lot Status');
-    // console.log('='.repeat(50));
+    console.log('\n');
+    console.log('🚗 CanaryLabs Parking Lot Status');
     console.log(`Total Spots: ${status.totalSpots}`);
     console.log(`Occupied: ${status.occupied}`);
     console.log(`Available: ${status.available}`);
@@ -95,11 +102,10 @@ function viewStatus() {
     for (const [floor, data] of Object.entries(status.byFloor)) {
         console.log(`${floor}: ${data.available}/${data.total} available`);
     }
-    console.log('='.repeat(50));
+    console.log('\n');
 }
 
 async function main() {
-    console.log('\nWelcome to the Parking Lot!');
     let running = true;
 
     while (running) {
@@ -120,11 +126,12 @@ async function main() {
                 viewStatus();
                 break;
             case '5':
-                console.log('\nExiting!');
+                console.log('\nExiting! Hope you enjoyed my project. :)');
                 running = false;
                 break;
             default:
-                console.log('\n❌ Invalid choice. Please enter from 1-5.'); 
+                console.log('\n❌ Invalid choice. Please enter from 1-5.');
+                console.log('\n'); 
         }
     }
     rl.close();
