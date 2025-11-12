@@ -7,8 +7,8 @@ class ParkingLot {
 
     constructor(floors, spotsPerFloor) {
         if (ParkingLot.instance) { return ParkingLot.instance; }
-        this.floors = this.floors;
-        this.spotsPerFloor = this.spotsPerFloor;
+        this.floors = floors;
+        this.spotsPerFloor = spotsPerFloor;
         this.spots = [];
         this.activeTickets = new Map();
         this.ticketCounter = 1;
@@ -43,7 +43,7 @@ class ParkingLot {
     autoPark(vehicle) {
         const spot = this.findAvilableSpot(vehicle);
         if (!spot) {
-            throw new Error('No available spots for ${vehicle.getType}');
+            throw new Error('No available spots for ${vehicle.getType()}');
         }
 
         spot.occupy(vehicle);
@@ -112,4 +112,4 @@ class ParkingLot {
     }
 }
 
-module.exports = ParkingLot;
+export default ParkingLot;
