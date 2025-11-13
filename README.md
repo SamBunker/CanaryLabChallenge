@@ -1,8 +1,8 @@
 # Parking Lot Management System
 
-**Challenge 4**: Object-Oriented Parking Lot System Design
-**Developer**: Samuel Bunker
-**Submission Date**: November 13th, 2025
+- Challenge 4: Object-Oriented Parking Lot System Design
+- Developer: Samuel Bunker
+- Submission Date: November 13th, 2025
 
 ---
 
