@@ -8,8 +8,8 @@
 
 ## Language Used
 
-**JavaScript (Node.js v14+)**
-z
+- JavaScript (Node.js v14+)
+
 ---
 
 ## Step-by-Step Guide to Run
